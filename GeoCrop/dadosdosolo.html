@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soil Data - SoilGrids</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<style>
+body { margin: 0; font-family: 'Inter', sans-serif; background-color: #f8f8f8; }
+/* Navbar */
+.custom-navbar { background-color: #A2CCAB !important; height: 120px; }
+.custom-navbar .container-fluid { display: flex; align-items: center; gap: 15px; }
+.custom-navbar img { height: 180px; }
+.custom-navbar .navbar-brand { color: #000 !important; font-size: 1.2rem; font-weight: 700; margin-left: 10px; transition: 0.3s; }
+.custom-navbar .nav-link { color: #000 !important; font-size: 1.2rem; font-weight: 600; transition: 0.3s; }
+.custom-navbar .navbar-brand:hover, .custom-navbar .nav-link:hover { color: #2d5f2d !important; text-decoration: underline; }
+.custom-navbar .dropdown-menu { background-color: #A2CCAB; }
+.custom-navbar .dropdown-item { color: #000; transition: 0.3s; }
+.custom-navbar .dropdown-item:hover { background-color: #8FBFA0; }
+
+/* Content */
+.content { background-color: #fff; margin: 60px auto; padding: 80px; border-radius: 14px; width: 85%; box-shadow: 0 8px 30px rgba(0,0,0,0.08);}
+.content h2 { margin-bottom: 40px; font-weight: 700; color: #183a1d;}
+.data-container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; margin-bottom: 40px;}
+.data-box { background-color: #f9f9f9; flex: 1 1 23%; padding: 20px; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); text-align: center; min-width: 140px;}
+.data-box h4 { margin-bottom: 10px; color: #183a1d;}
+.data-box p { font-size: 1.5rem; font-weight: 700; color: #333;}
+.map-section { margin-top: 50px; }
+#soil-map { height: 500px; width: 100%; border-radius: 12px; box-shadow: 0 3px 15px rgba(0,0,0,0.15);}
+.credit { text-align: center; font-size: 0.9rem; color: #555; margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid">
+      <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="financas.html">Commoditie prices</a>
+      <a class="navbar-brand" href="about.html">About</a>
+      <a class="navbar-brand" href="cropmanagement.html">Crop management and recommendations</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Functionalities
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="dadosclimáticos.html">Climate Data</a></li>
+              <li><a class="dropdown-item" href="dadosdosolo.html">Soil Data</a></li>
+              <li><a class="dropdown-item" href="colheitas.html">Harvests</a></li>
+              <li><a class="dropdown-item" href="livestock.html">Livestock management</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="funcionalidades.html">All Functionalities</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<!-- Content -->
+<section class="content">
+<h2>Soil Data Sample</h2>
+
+<div class="data-container">
+<div class="data-box"><h4>pH (H₂O)</h4><p id="ph">7,5</p></div>
+<div class="data-box"><h4>Sand %</h4><p id="sand">45%</p></div>
+<div class="data-box"><h4>Silt %</h4><p id="silt">35%</p></div>
+<div class="data-box"><h4>Clay %</h4><p id="clay">15%</p></div>
+<div class="data-box"><h4>Organic Carbon (g/kg)</h4><p id="oc">5%</p></div>
+<div class="data-box"><h4>Bulk Density (kg/m³)</h4><p id="bd">1300</p></div>
+</div>
+
+<div class="map-section">
+<h3>Soil Map</h3>
+<div id="soil-map"></div>
+</div>
+
+
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+async function fetchSoilData() {
+  const lat = 41.8781;
+  const lon = -87.6298;
+  const url = `https://rest.isric.org/soilgrids/v2.0/properties/query?lat=${lat}&lon=${lon}`;
+  try {
+    
+    // Mapa
+    const map = L.map('soil-map').setView([lat, lon], 9);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+
+    const circle = L.circle([lat, lon], {
+      color:'#4CAF50',
+      fillColor:'#4CAF50',
+      fillOpacity:0.5,
+      radius:1000
+    }).addTo(map);
+    circle.bindPopup(`<b>Soil Sample</b><br>pH: ${ph}<br>Sand: ${sand}%<br>Silt: ${silt}%<br>Clay: ${clay}%<br>OC: ${oc} g/kg<br>BD: ${bd} kg/m³`).openPopup();
+
+  } catch(e) {
+    console.error(e);
+    alert("Unable to load soil data.");
+  }
+}
+
+window.onload = fetchSoilData;
+</script>
+
+</body>
+</html>

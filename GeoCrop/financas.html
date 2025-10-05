@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rural Financial Data - GeoCrop</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f8f8f8;
+  }
+  /* Navbar */
+  .custom-navbar {
+    background-color: #A2CCAB !important;
+    height: 120px;
+  }
+  .custom-navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .custom-navbar img { height: 180px; }
+  .custom-navbar .navbar-brand { 
+    color: #000000 !important; 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    margin-left: 10px; 
+    transition: 0.3s; 
+  }
+  .custom-navbar .nav-link { 
+    color: #000000 !important; 
+    font-size: 1.2rem; 
+    font-weight: 600; 
+    transition: 0.3s; 
+  }
+  .custom-navbar .navbar-brand:hover,
+  .custom-navbar .nav-link:hover { 
+    color: #2d5f2d !important; 
+    text-decoration: underline; 
+  }
+  .content {
+    background-color: #ffffff;
+    margin: 60px auto;
+    padding: 80px;
+    border-radius: 14px;
+    width: 85%;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+  .content h2 {
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #183a1d;
+  }
+  .data-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .data-box {
+    background-color: #f9f9f9;
+    flex: 1 1 23%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    min-width: 150px;
+  }
+  .data-box h4 {
+    margin-bottom: 10px;
+    color: #183a1d;
+  }
+  .data-box p {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #333;
+  }
+  .nasa-credit {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg custom-navbar">
+  <div class="container-fluid">
+    <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="financas.html">Financial management</a>
+    <a class="navbar-brand" href="about.html">About</a>
+    <a class="navbar-brand" href="cropmanagement.html">Crop management and recommendations</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Functionalities
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="dadosclimáticos.html">Climate Data</a></li>
+            <li><a class="dropdown-item" href="dadosdosolo.html">Soil Data</a></li>
+            <li><a class="dropdown-item" href="colheitas.html">Harvests</a></li>
+            <li><a class="dropdown-item" href="livestock.html">Livestock management</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="funcionalidades.html">All Functionalities</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Content -->
+<section class="content">
+  <h2>Rural Commodity Prices</h2>
+
+  <div class="data-container">
+    <div class="data-box"><h4>Corn</h4><p id="price-corn">Loading...</p></div>
+    <div class="data-box"><h4>Soy</h4><p id="price-soy">Loading...</p></div>
+    <div class="data-box"><h4>Wheat</h4><p id="price-wheat">Loading...</p></div>
+    <div class="data-box"><h4>Beans</h4><p id="price-beans">Loading...</p></div>
+    <div class="data-box"><h4>Cattle</h4><p id="price-cattle">Loading...</p></div>
+  </div>
+
+  <p class="nasa-credit">Source: <a href="https://www.alphavantage.co/" target="_blank">Alpha Vantage API</a></p>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const ALPHA_KEY = "YOUR_ALPHA_VANTAGE_KEY"; // Substitua pela sua chave
+
+// Commodities symbols and units
+const commodities = {
+  corn: {symbol: "CORN", unit: "per bushel"},
+  soy: {symbol: "SOYB", unit: "per bushel"},
+  wheat: {symbol: "WEAT", unit: "per bushel"},
+  beans: {symbol: "BEAN", unit: "per kg"},
+  cattle: {symbol: "COW", unit: "per pound"}
+};
+
+async function fetchCommodityPrice(symbol, elementId, unit) {
+  try {
+    const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${ALPHA_KEY}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const price = data['Global Quote'] && data['Global Quote']['05. price'];
+    document.getElementById(elementId).textContent = price ? `$${parseFloat(price).toFixed(2)} ${unit}` : "N/A";
+  } catch (err) {
+    console.error(`Error fetching ${symbol} price:`, err);
+    document.getElementById(elementId).textContent = "N/A";
+  }
+}
+
+// Load all commodities
+for (const [key, info] of Object.entries(commodities)) {
+  fetchCommodityPrice(info.symbol, `price-${key}`, info.unit);
+}
+</script>
+
+</body>
+</html>

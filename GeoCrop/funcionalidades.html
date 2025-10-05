@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoCrop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f8f8;
+      }
+
+      /* Navbar custom */
+      .custom-navbar {
+        background-color: #A2CCAB !important;
+        height: 120px;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .custom-navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .custom-navbar img {
+        height: 180px;
+      }
+
+      .custom-navbar .navbar-brand {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 10px;
+        transition: 0.3s;
+      }
+
+      .custom-navbar .navbar-nav {
+        margin-left: 0;
+      }
+
+      .custom-navbar .nav-link {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      /* Hover navbar - mantém sublinhado */
+      .custom-navbar .navbar-brand:hover,
+      .custom-navbar .nav-link:hover {
+        color: #2d5f2d !important;
+        text-decoration: underline;
+      }
+
+      .custom-navbar .dropdown-menu {
+        background-color: #A2CCAB;
+      }
+
+      .custom-navbar .dropdown-item {
+        color: #000000;
+        transition: 0.3s;
+      }
+
+      .custom-navbar .dropdown-item:hover {
+        background-color: #8FBFA0;
+      }
+
+      /* Content */
+      .content {
+        background-color: #ffffff;
+        margin: 60px auto;
+        padding: 80px;
+        border-radius: 14px;
+        width: 85%;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+      }
+
+      .content:hover {
+        transform: translateY(-3px);
+      }
+
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+      }
+
+      /* Remove sublinhado apenas dos links dos cards */
+      .card-link {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .card {
+        background-color: #f9f9f9;
+        width: 260px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        text-align: left;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .card:hover {
+        transform: translateY(-6px) scale(1.02);
+        border-color: #4caf50;
+        box-shadow: 0 6px 18px rgba(0, 150, 70, 0.2);
+        background-color: #f6fff8;
+      }
+
+      .card h3 {
+        margin: 0 0 10px;
+        color: #183a1d;
+        font-weight: 700;
+      }
+
+      .card p {
+        color: #555;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <div class="container-fluid">
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="financas.html">Commoditie prices</a>
+        <a class="navbar-brand" href="about.html">About</a>
+        <a class="navbar-brand" href="cropmanagement.html">Crop management and recommendations</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Functionalities
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="dadosclimáticos.html">Climate Data</a></li>
+                  <li><a class="dropdown-item" href="dadosdosolo.html">Soil Data</a></li>
+                  <li><a class="dropdown-item" href="colheitas.html">Harvests</a></li>
+                  <li><a class="dropdown-item" href="livestock.html">Livestock management</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="funcionalidades.html">Functionalities</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+
+    <section class="content">
+        <div class="cards">
+          <a href="dadosclimáticos.html" class="card-link">
+            <div class="card">
+              <h3>Climate data</h3>
+              <p>Real-time weather data for smarter decisions.</p>
+            </div>
+          </a>
+          <a href="dadosdosolo.html" class="card-link">
+            <div class="card">
+              <h3>Soil Data</h3>
+              <p>Check soil nutrients, pH, and texture for better crops.</p>
+            </div>
+          </a>
+          <a href="cropmanagement.html" class="card-link">
+            <div class="card">
+              <h3>Crop Management</h3>
+              <p>Manage your harvest and utilize NASA data to optimize your production</p>
+            </div>
+          </a>
+          <a href="colheitas.html" class="card-link">
+            <div class="card">
+              <h3>Crop input</h3>
+              <p>Enter your harvest data, earn points and compare with past harvests.</p>
+            </div>
+          </a>
+          <a href="livestock.html" class="card-link">
+            <div class="card">
+              <h3>Livestock Management</h3>
+              <p>Monitor your animals' health and wellbeing with data-driven insights.</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

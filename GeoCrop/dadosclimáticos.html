@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Climate Data - NASA POWER</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f8f8;
+      }
+      /* Navbar original com funcionalidades */
+      .custom-navbar {
+        background-color: #A2CCAB !important;
+        height: 120px;
+      }
+      .custom-navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .custom-navbar img {
+        height: 180px;
+      }
+      .custom-navbar .navbar-brand {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 10px;
+        transition: 0.3s;
+      }
+      .custom-navbar .nav-link {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .custom-navbar .navbar-brand:hover,
+      .custom-navbar .nav-link:hover {
+        color: #2d5f2d !important;
+        text-decoration: underline;
+      }
+      .custom-navbar .dropdown-menu {
+        background-color: #A2CCAB;
+      }
+      .custom-navbar .dropdown-item {
+        color: #000000;
+        transition: 0.3s;
+      }
+      .custom-navbar .dropdown-item:hover {
+        background-color: #8FBFA0;
+      }
+      /* Conteúdo */
+      .content {
+        background-color: #ffffff;
+        margin: 60px auto;
+        padding: 80px;
+        border-radius: 14px;
+        width: 85%;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      }
+      .content h2 {
+        margin-bottom: 40px;
+        font-weight: 700;
+        color: #183a1d;
+      }
+      .data-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+      }
+      .data-box {
+        background-color: #f9f9f9;
+        width: 23%;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        text-align: center;
+      }
+      .data-box h4 {
+        margin-bottom: 10px;
+        color: #183a1d;
+      }
+      .data-box p {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #333;
+      }
+      .map-section {
+        margin-top: 50px;
+      }
+      #radiation-map {
+        height: 500px;
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+      }
+      .legend {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+      }
+      .legend span {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        margin-right: 6px;
+        border-radius: 3px;
+      }
+      .nasa-credit {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #555;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar original -->
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <div class="container-fluid">
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="financas.html">Commoditie prices</a>
+        <a class="navbar-brand" href="about.html">About</a>
+        <a class="navbar-brand" href="cropmanagement.html">Crop management and recommendations</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Functionalities
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="dadosclimáticos.html">Climate Data</a></li>
+                <li><a class="dropdown-item" href="dadosdosolo.html">Soil Data</a></li>
+                <li><a class="dropdown-item" href="colheitas.html">Harvests</a></li>
+                <li><a class="dropdown-item" href="livestock.html">Livestock management</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="funcionalidades.html">All Functionalities</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content -->
+    <section class="content">
+      <h2>Daily Climate Data for Chicago</h2>
+
+      <div class="data-container">
+        <div class="data-box">
+          <h4>Max Temperature</h4>
+          <p id="temp-max">Loading...</p>
+        </div>
+        <div class="data-box">
+          <h4>Min Temperature</h4>
+          <p id="temp-min">Loading...</p>
+        </div>
+        <div class="data-box">
+          <h4>Precipitation</h4>
+          <p id="precip">Loading...</p>
+        </div>
+        <div class="data-box">
+          <h4>Relative Humidity</h4>
+          <p id="humidity">Loading...</p>
+        </div>
+      </div>
+
+      <!-- Radiation Map Section -->
+      <div class="map-section">
+        <h3>Solar Radiation (Global Horizontal Irradiance)</h3>
+        <div id="radiation-map"></div>
+      </div>
+
+      <p class="nasa-credit">Source: <a href="https://power.larc.nasa.gov" target="_blank">NASA POWER</a></p>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+      async function fetchWeatherData() {
+        const url = 'https://power.larc.nasa.gov/api/temporal/daily/point';
+        const date = "20240715"; 
+        const params = {
+          parameters: 'T2M_MAX,T2M_MIN,PRECTOTCORR,RH2M,ALLSKY_SFC_SW_DWN',
+          community: 'AG',
+          latitude: 41.8781,
+          longitude: -87.6298,
+          start: date,
+          end: date,
+          format: 'JSON',
+        };
+
+        try {
+          const response = await fetch(`${url}?${new URLSearchParams(params)}`);
+          const data = await response.json();
+
+          const tempMax = data.properties.parameter.T2M_MAX[date];
+          const tempMin = data.properties.parameter.T2M_MIN[date];
+          const precip = data.properties.parameter.PRECTOTCORR[date];
+          const humidity = data.properties.parameter.RH2M[date];
+          const radiation = data.properties.parameter.ALLSKY_SFC_SW_DWN[date];
+
+          function safe(val, unit) {
+            return (val === -999) ? "N/A" : `${val} ${unit}`;
+          }
+
+          document.getElementById('temp-max').textContent = safe(tempMax, "°C");
+          document.getElementById('temp-min').textContent = safe(tempMin, "°C");
+          document.getElementById('precip').textContent = safe(precip, "mm");
+          document.getElementById('humidity').textContent = safe(humidity, "%");
+
+          // Radiation Map
+          const map = L.map('radiation-map').setView([41.8781, -87.6298], 8);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+          }).addTo(map);
+
+          const getColor = (val) => {
+            return val > 7 ? '#ff0000' :
+                   val > 5 ? '#ff6600' :
+                   val > 3 ? '#ffcc00' :
+                   '#ffff66';
+          };
+
+          const circle = L.circle([41.8781, -87.6298], {
+            color: getColor(radiation),
+            fillColor: getColor(radiation),
+            fillOpacity: 0.7,
+            radius: radiation * 150
+          }).addTo(map);
+
+          circle.bindPopup(`<b>Solar Radiation:</b> ${safe(radiation, "kWh/m²/day")}`).openPopup();
+
+          const legend = L.control({position: 'bottomright'});
+          legend.onAdd = function () {
+            const div = L.DomUtil.create('div', 'legend');
+            div.innerHTML += '<b>Radiation Intensity</b><br>';
+            div.innerHTML += '<span style="background:#ff0000"></span> > 7 kWh/m²<br>';
+            div.innerHTML += '<span style="background:#ff6600"></span> 5 - 7<br>';
+            div.innerHTML += '<span style="background:#ffcc00"></span> 3 - 5<br>';
+            div.innerHTML += '<span style="background:#ffff66"></span> < 3<br>';
+            return div;
+          };
+          legend.addTo(map);
+
+        } catch (error) {
+          console.error('Error fetching climate data:', error);
+          alert('Unable to load climate data. Please try again later.');
+        }
+      }
+
+      window.onload = fetchWeatherData;
+    </script>
+  </body>
+</html>

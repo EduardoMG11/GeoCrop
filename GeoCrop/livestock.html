@@ -1,0 +1,188 @@
+<!doctype html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoCrop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f8f8;
+      }
+      .custom-navbar {
+        background-color: #A2CCAB !important;
+        height: 120px;
+        font-family: 'Inter', sans-serif;
+      }
+      .custom-navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .custom-navbar img {
+        height: 180px;
+      }
+      .custom-navbar .navbar-brand {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 10px;
+        transition: 0.3s;
+      }
+      .custom-navbar .navbar-nav {
+        margin-left: 0;
+      }
+      .custom-navbar .nav-link {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .custom-navbar .navbar-brand:hover,
+      .custom-navbar .nav-link:hover {
+        color: #2d5f2d !important;
+        text-decoration: underline;
+      }
+      .custom-navbar .dropdown-menu {
+        background-color: #A2CCAB;
+      }
+      .custom-navbar .dropdown-item {
+        color: #000000;
+        transition: 0.3s;
+      }
+      .custom-navbar .dropdown-item:hover {
+        background-color: #8FBFA0;
+      }
+      .content {
+        background-color: #ffffff;
+        margin: 60px auto;
+        padding: 80px;
+        border-radius: 14px;
+        width: 85%;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+      }
+      .content:hover {
+        transform: translateY(-3px);
+      }
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+      }
+      .card {
+        background-color: #f9f9f9;
+        width: 260px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        text-align: left;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+      .card:hover {
+        transform: translateY(-6px) scale(1.02);
+        border-color: #4caf50;
+        box-shadow: 0 6px 18px rgba(0, 150, 70, 0.2);
+        background-color: #f6fff8;
+      }
+      .card h3 {
+        margin: 0 0 10px;
+        color: #183a1d;
+        font-weight: 700;
+      }
+      .card p {
+        color: #555;
+        font-size: 14px;
+      }
+      .card ul {
+        padding-left: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <div class="container-fluid">
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="financas.html">Commoditie prices</a>
+        <a class="navbar-brand" href="about.html">About</a>
+        <a class="navbar-brand" href="cropmanagement.html">Crop management and recommendations</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Functionalities
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="dadosclimáticos.html">Climate Data</a></li>
+                  <li><a class="dropdown-item" href="dadosdosolo.html">Soil Data</a></li>
+                  <li><a class="dropdown-item" href="colheitas.html">Harvests</a></li>
+                  <li><a class="dropdown-item" href="livestock.html">Livestock management</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="funcionalidades.html">Functionalities</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+    <br>
+    <br>
+    <h2 style="margin-left: 150px">Livestock Management Recommendations based on data from your location</h2>
+    <section class="content">
+        <div class="cards">
+            <div class="card">
+              <h3>Pasture and Soil</h3>
+              <ul>
+                <li>✅ Utilize fertility: plant diversified forage species (grasses and legumes) for cattle, sheep, and goats</li>
+                <li>⚠️ Watch out: erosion and compaction risk in waterlogged areas</li>
+                <li>🔧 Recommendation: rotate paddocks, maintain soil cover, avoid animal traffic in wet areas; produce silage and hay for wet periods</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Animal Welfare</h3>
+              <ul>
+                <li>✅ Heat stress: provide natural or artificial shade, ventilated barns, and abundant fresh water</li>
+                <li>⚠️ Watch out: handling during hottest hours increases stress</li>
+                <li>🔧 Recommendation: handle animals in cooler hours (morning and late afternoon); ensure water availability</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Environmental and Sanitary Management</h3>
+              <ul>
+                <li>✅ High rainfall (29 mm) → implement proper manure management (composting, biodigesters, controlled soil application)</li>
+                <li>⚠️ Watch out: high humidity favors parasites (worms, ticks, flies)</li>
+                <li>🔧 Recommendation: intensify strategic deworming, maintain clean facilities, ensure barn ventilation</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Feeding and Supplementation</h3>
+              <ul>
+                <li>✅ High-quality forage as the diet base</li>
+                <li>⚠️ Watch out: micronutrients (Zn, Mn, Fe) may be less available in higher pH soils</li>
+                <li>🔧 Recommendation: provide mineral supplements and diversify diet with local agricultural by-products (corn, soy)</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Poultry and Swine</h3>
+              <ul>
+                <li>✅ Moisture control: keep floors dry, manage bedding properly</li>
+                <li>⚠️ Watch out: high humidity → respiratory diseases and footpad dermatitis</li>
+                <li>🔧 Recommendation: ensure ventilation, isolate batches, disinfect frequently, keep vaccinations up to date</li>
+              </ul>
+            </div>
+        </div>
+      </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoCrop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f8f8;
+      }
+
+      /* Navbar custom */
+      .custom-navbar {
+        background-color: #A2CCAB !important;
+        height: 120px;
+        font-family: 'Inter', sans-serif;
+      }
+
+      .custom-navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .custom-navbar img {
+        height: 180px; /* mantém tamanho original da logo */
+      }
+
+      .custom-navbar .navbar-brand {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 10px;
+        transition: 0.3s;
+      }
+
+      .custom-navbar .navbar-nav {
+        margin-left: 0; /* alinha dropdown "Functionalities" à esquerda */
+      }
+
+      .custom-navbar .nav-link {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+
+      /* Hover navbar */
+      .custom-navbar .navbar-brand:hover,
+      .custom-navbar .nav-link:hover {
+        color: #2d5f2d !important;
+        text-decoration: underline;
+      }
+
+      .custom-navbar .dropdown-menu {
+        background-color: #A2CCAB;
+      }
+
+      .custom-navbar .dropdown-item {
+        color: #000000;
+        transition: 0.3s;
+      }
+
+      .custom-navbar .dropdown-item:hover {
+        background-color: #8FBFA0;
+      }
+
+      /* Content */
+      .content {
+        background-color: white;
+        margin: 40px auto;
+        padding: 100px;
+        border-radius: 10px;
+        width: 80%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      }
+
+      /* Cards */
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .card {
+        background-color: #f9f9f9;
+        width: 250px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+      }
+
+      /* Hover cards */
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      }
+
+      .card h3 {
+        margin: 0;
+        color: #183a1d;
+      }
+
+      .card p {
+        color: #555;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <div class="container-fluid">
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="financas.html">Commoditie prices</a>
+        <a class="navbar-brand" href="about.html">About</a>
+        <a class="navbar-brand" href="cropmanagement.html">Crop management and recommendations</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Functionalities
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="dadosclimáticos.html">Climate Data</a></li>
+                  <li><a class="dropdown-item" href="dadosdosolo.html">Soil Data</a></li>
+                  <li><a class="dropdown-item" href="colheitas.html">Harvests</a></li>
+                  <li><a class="dropdown-item" href="livestock.html">Livestock management</a></li>
+                  
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="funcionalidades.html">All Functionalities</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+
+    <section class="content">
+        <div class="cards">
+          <div class="card">
+            <h3>NASA data at your service</h3>
+            <p>Boost your crop with NASA data and AI and leverage your results</p>
+          </div>
+          <div class="card">
+            <h3>Visualize your livestock's health</h3>
+            <p>Using climate data, and the information from your farm we help you manage better your animal's health</p>
+          </div>
+          <div class="card">
+            <h3>Implement technology in your farm</h3>
+            <p>Make your production more efficient with this application.</p>
+          </div>
+          <div class="card">
+            <h3>Check the quality of your soil</h3>
+            <p>Based on geophysical data from NASA, you can see how the quality of the soil in your region</p>
+          </div>
+        </div>
+      
+        <!-- Carousel -->
+        <div id="carouselExampleAutoplaying" class="carousel slide mt-4" data-bs-ride="carousel" data-bs-interval="1800">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="images/dairy.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="images/farmland.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="images/fazenda.jpg" class="d-block w-100" alt="...">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoCrop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f8f8;
+      }
+      .custom-navbar {
+        background-color: #A2CCAB !important;
+        height: 120px;
+        font-family: 'Inter', sans-serif;
+      }
+      .custom-navbar .container-fluid {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .custom-navbar img {
+        height: 180px;
+      }
+      .custom-navbar .navbar-brand {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-left: 10px;
+        transition: 0.3s;
+      }
+      .custom-navbar .navbar-nav {
+        margin-left: 0;
+      }
+      .custom-navbar .nav-link {
+        color: #000000 !important;
+        font-size: 1.2rem;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .custom-navbar .navbar-brand:hover,
+      .custom-navbar .nav-link:hover {
+        color: #2d5f2d !important;
+        text-decoration: underline;
+      }
+      .custom-navbar .dropdown-menu {
+        background-color: #A2CCAB;
+      }
+      .custom-navbar .dropdown-item {
+        color: #000000;
+        transition: 0.3s;
+      }
+      .custom-navbar .dropdown-item:hover {
+        background-color: #8FBFA0;
+      }
+      .content {
+        background-color: #ffffff;
+        margin: 60px auto;
+        padding: 80px;
+        border-radius: 14px;
+        width: 85%;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease;
+      }
+      .content:hover {
+        transform: translateY(-3px);
+      }
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 25px;
+      }
+      .card {
+        background-color: #f9f9f9;
+        width: 260px;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        text-align: left;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+      .card:hover {
+        transform: translateY(-6px) scale(1.02);
+        border-color: #4caf50;
+        box-shadow: 0 6px 18px rgba(0, 150, 70, 0.2);
+        background-color: #f6fff8;
+      }
+      .card h3 {
+        margin: 0 0 10px;
+        color: #183a1d;
+        font-weight: 700;
+      }
+      .card p {
+        color: #555;
+        font-size: 14px;
+      }
+      .card ul {
+        padding-left: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg custom-navbar">
+      <div class="container-fluid">
+        <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="financas.html">Commoditie prices</a>
+        <a class="navbar-brand" href="about.html">About</a>
+        <a class="navbar-brand" href="cropmanagement.html">Crop management and recommendations</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Functionalities
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="dadosclimáticos.html">Climate Data</a></li>
+                  <li><a class="dropdown-item" href="dadosdosolo.html">Soil Data</a></li>
+                  <li><a class="dropdown-item" href="colheitas.html">Harvests</a></li>
+                  <li><a class="dropdown-item" href="livestock.html">Livestock management</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="funcionalidades.html">Functionalities</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+      </div>
+    </nav>
+    <br>
+    <br>
+    <h2 style="margin-left: 150px">Recommendations based on the soil in your region</h2>
+    <section class="content">
+        <div class="cards">
+            
+            <div class="card">
+              <h3>PH</h3>
+              <ul>
+                <li>✅ Good: Close to ideal for most crops</li>
+                <li>⚠️ Watch out: Some micronutrients (iron, manganese, zinc) become less available at higher pH</li>
+                <li>🔧 Recommendation: Avoid adding lime; if leaf yellowing (chlorosis) appears, apply micronutrients as foliar spray</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Texture: silty loam (30–45% sand, 35–50% silt, 15–30% clay)</h3>
+              <ul>
+                <li>✅ Good: Fertile soil, good water-holding capacity</li>
+                <li>⚠️ Watch out: High silt → risk of erosion and compaction</li>
+                <li>🔧 Recommendation: Avoid heavy machinery when soil is wet; use cover crops; rotate with deep-rooted crops</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Organic Matter (5–10%)</h3>
+              <ul>
+                <li>✅ Good: Healthy level, supports microbes and fertility</li>
+                <li>⚠️ Watch out: Organic matter declines quickly without replenishment</li>
+                <li>🔧 Recommendation: Add compost, crop residues, and mulching; avoid burning residues; keep soil covered year-round</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Bulk Density (1.2–1.5 g/cm³)</h3>
+              <ul>
+                <li>✅ Good: Roots can grow well below 1.6 g/cm³</li>
+                <li>⚠️ Watch out: Urban and compacted areas may exceed this</li>
+                <li>🔧 Recommendation: Practice minimum tillage or no-till; encourage biological activity; limit heavy traffic on soil</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Soil Organic Carbon (~10–20 g/kg)</h3>
+              <ul>
+                <li>✅ Good: Improves nutrient retention and water holding</li>
+                <li>🔧 Recommendation: Use carbon-building practices (perennials, cover crops); avoid bare soil to prevent carbon loss</li>
+              </ul>
+            </div>
+        </div>
+      </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
