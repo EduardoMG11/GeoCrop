@@ -89,7 +89,7 @@
 </head>
 <body>
 
-<!-- Navbar -->
+
 <nav class="navbar navbar-expand-lg custom-navbar">
   <div class="container-fluid">
     <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
@@ -119,7 +119,7 @@
   </div>
 </nav>
 
-<!-- Content -->
+
 <section class="content">
   <h2>Rural Commodity Prices</h2>
 
@@ -136,9 +136,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-const ALPHA_KEY = "YOUR_ALPHA_VANTAGE_KEY"; // Substitua pela sua chave
+const ALPHA_KEY = "YOUR_ALPHA_VANTAGE_KEY"; 
 
-// Commodities symbols and units
+
 const commodities = {
   corn: {symbol: "CORN", unit: "per bushel"},
   soy: {symbol: "SOYB", unit: "per bushel"},
@@ -160,7 +160,7 @@ async function fetchCommodityPrice(symbol, elementId, unit) {
   }
 }
 
-// Load all commodities
+
 for (const [key, info] of Object.entries(commodities)) {
   fetchCommodityPrice(info.symbol, `price-${key}`, info.unit);
 }

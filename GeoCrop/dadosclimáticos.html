@@ -123,7 +123,7 @@
     </style>
   </head>
   <body>
-    <!-- Navbar original -->
+    
     <nav class="navbar navbar-expand-lg custom-navbar">
       <div class="container-fluid">
         <a href="index.html"><img src="images/logo.png" alt="Logo"></a>
@@ -154,9 +154,9 @@
       </div>
     </nav>
 
-    <!-- Content -->
+    
     <section class="content">
-      <h2>Daily Climate Data for Chicago</h2>
+      <h2>Monthly Climate Data for Chicago</h2>
 
       <div class="data-container">
         <div class="data-box">
@@ -177,7 +177,7 @@
         </div>
       </div>
 
-      <!-- Radiation Map Section -->
+      
       <div class="map-section">
         <h3>Solar Radiation (Global Horizontal Irradiance)</h3>
         <div id="radiation-map"></div>
@@ -221,7 +221,7 @@
           document.getElementById('precip').textContent = safe(precip, "mm");
           document.getElementById('humidity').textContent = safe(humidity, "%");
 
-          // Radiation Map
+          
           const map = L.map('radiation-map').setView([41.8781, -87.6298], 8);
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap'
